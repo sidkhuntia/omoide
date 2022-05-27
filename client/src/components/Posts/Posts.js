@@ -4,7 +4,7 @@ import useStyles from "./styles.js";
 import { useSelector } from "react-redux";
 import { Grid, CircularProgress } from "@material-ui/core";
 
-const Posts = ({setCurrentID}) => {
+const Posts = ({ setCurrentID }) => {
   const classes = useStyles();
   const posts = useSelector((state) => state.posts);
   console.log(posts);
@@ -18,6 +18,9 @@ const Posts = ({setCurrentID}) => {
       spacing={3}
     >
       {posts.map((post) => (
+        // changing key to id to avoid warning and 
+        //assigning key a value if index doesnt give warning 
+        //but still gives the repeated post error
         <Grid key={post._id} item xs={12} sm={6}>
           <Post post={post} setCurrentID={setCurrentID} />
         </Grid>
