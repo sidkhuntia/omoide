@@ -28,7 +28,13 @@ const Post = ({ post, setCurrentID }) => {
         </Typography>
       </div>
       <div className={classes.overlay2}>
-        <Button style={{ color: "white" }} size="small" onClick={() => {setCurrentID(post._id)}}>
+        <Button
+          style={{ color: "white" }}
+          size="small"
+          onClick={() => {
+            setCurrentID(post._id);
+          }}
+        >
           <MoreHorizIcon fontSize="medium" />
         </Button>
       </div>
@@ -37,8 +43,11 @@ const Post = ({ post, setCurrentID }) => {
           {post.tags.map((tag) => `#${tag} `)}
         </Typography>
       </div>
+      <Typography className={classes.title} gutterBottom variant="h5">
+        {post.title}
+      </Typography>
       <CardContent>
-        <Typography className={classes.title} gutterBottom variant="h5">
+        <Typography gutterBottom variant="h5">
           {post.message}
         </Typography>
       </CardContent>
@@ -54,5 +63,5 @@ const Post = ({ post, setCurrentID }) => {
     </Card>
   );
 };
- 
+
 export default Post;

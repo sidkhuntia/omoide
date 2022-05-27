@@ -9,7 +9,7 @@ import Forms from "./components/Forms/Form.js";
 import useStyles from "./styles.js";
 
 const App = () => {
-  const [currentID, setCurrentID] = useState(null);
+  const [currentID, setCurrentID] = useState(0);
 
   const classes = useStyles();
   const dispatch = useDispatch();
