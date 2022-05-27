@@ -70,11 +70,12 @@ const Post = ({ post, setCurrentID }) => {
         <Button
           size="small"
           color="primary"
+          align="right"
           onClick={() => {
             dispatch(deletePost(post._id));
           }}
         >
-          <DeleleIcon fontSize="small" /> Delete
+          <DeleleIcon fontSize="small" /> &nbsp; Delete
         </Button>
       </CardActions>
     </Card>
