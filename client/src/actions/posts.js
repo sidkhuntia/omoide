@@ -20,10 +20,8 @@ export const createPost = (newPost) => async (dispatch) => {
 };
 
 export const updatePost = (id, post) => async (dispatch) => {
-  console.log("HERE");
   try {
     const { data } = await api.updatePost(id, post);
-    // console.log(data)
     dispatch({ type: actions.UPDATE, payload: data });
   } catch (error) {
     console.log(error);
@@ -40,8 +38,6 @@ export const deletePost = (id) => async (dispatch) => {
 export const likePost = (id) => async (dispatch) => {
   try {
     const { data } = await api.likePost(id);
-    console.log("HERE");
-    console.log(data);
     dispatch({ type: actions.LIKE, payload: data });
   } catch (error) {
     console.log(error);
