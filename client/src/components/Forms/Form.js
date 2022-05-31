@@ -11,16 +11,24 @@ const Form = ({ currentID, setCurrentID }) => {
     title: "",
     message: "",
     tags: "",
-    createdAt: Date.now,
     selectedFile: null,
     likeCount: 0,
+    createdAt: Date.now,
   });
   const post = useSelector((state) =>
     currentID ? state.posts.find((post) => post._id === currentID) : null
   );
   useEffect(() => {
     if (post) {
-      setPostData(post);
+      setPostData({
+        creator: post.creator,
+        title: post.title,
+        message: post.message,
+        tags: post.tags,
+        selectedFile: post.selectedFile,
+        likeCount: post.likeCount,
+        createdAt: post.createdAt,
+      });
     }
   }, [post]);
   const classes = useStyles();
@@ -41,11 +49,10 @@ const Form = ({ currentID, setCurrentID }) => {
       title: "",
       message: "",
       tags: "",
-      createdAt: null,
       selectedFile: null,
-      likeCount: null,
+      likeCount: 0,
+      createdAt: Date.now,
     });
-
   };
 
   return (
@@ -97,7 +104,7 @@ const Form = ({ currentID, setCurrentID }) => {
           fullWidth
           value={postData.tags}
           onChange={(e) => {
-            setPostData({ ...postData, tags: e.target.value.split(',') });
+            setPostData({ ...postData, tags: e.target.value.split(",") });
           }}
         />
         <div className={classes.fileInput}>
