@@ -4,10 +4,21 @@ import { useHistory } from "react-router-dom";
 // prettier-ignore
 import { Avatar, Button, Paper, Grid, Typography, Container} from '@material-ui/core'
 import { GoogleLogin } from "react-google-login";
+
+
 import Icon from "./icon";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import useStyles from "./styles.js";
 import Input from "./Input.js";
+import {signin, signup} from '../../actions/auth.js'
+
+const initialFormState = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
 
 const Auth = () => {
   const classes = useStyles();
@@ -17,10 +28,22 @@ const Auth = () => {
   //states
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
+  const [formData, setFormData] = useState(initialFormState);
 
   //handle Functions
-  const handleSubmit = (e) => {};
-  const handleChange = (e) => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isSignUp) {
+      dispatch(signup(formData, history));
+    } else {
+      dispatch(signin(formData, history)); 
+    }
+    history.push("/");
+    console.log(formData);
+  };
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
