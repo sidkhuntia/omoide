@@ -22,7 +22,7 @@ export const signin = async (req, res) => {
             email: existingUser.email,
             id: existingUser._id,
           },
-          process.env.JWT_SECRET,
+          "secret",
           { expiresIn: "1h" }
         );
         return res.status(200).json({ result: existingUser, token });
@@ -54,10 +54,10 @@ export const signup = async (req, res) => {
         email: result.email,
         id: result._id,
       },
-      process.env.JWT_SECRET,
+      "secret",
       { expiresIn: "1h" }
     );
-    return res.status(200).json({ result: existingUser, token });
+    res.status(200).json({ result, token });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Something went wrong!" });
