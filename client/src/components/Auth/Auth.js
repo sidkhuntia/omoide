@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import {useDispatch} from 'react-redux'
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 // prettier-ignore
 import { Avatar, Button, Paper, Grid, Typography, Container} from '@material-ui/core'
 import { GoogleLogin } from "react-google-login";
@@ -10,7 +11,8 @@ import Input from "./Input.js";
 
 const Auth = () => {
   const classes = useStyles();
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   //states
   const [showPassword, setShowPassword] = useState(false);
@@ -29,9 +31,10 @@ const Auth = () => {
     const result = res?.profileObj;
     const token = res?.tokenId;
     try {
-        dispatch({type: 'AUTH', payload: {token, result}})
+      dispatch({ type: "AUTH", payload: { token, result } });
+      history.push("/");
     } catch (err) {
-        console.log(err);
+      console.log(err);
     }
   };
   const googleFailure = (err) => {
