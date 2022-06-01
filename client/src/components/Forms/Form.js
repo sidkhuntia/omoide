@@ -11,7 +11,7 @@ const Form = ({ currentID, setCurrentID }) => {
     message: "",
     tags: "",
     selectedFile: null,
-    likes: null,
+    likes: [],
     createdAt: Date.now,
   });
 
@@ -51,7 +51,7 @@ const Form = ({ currentID, setCurrentID }) => {
       message: "",
       tags: "",
       selectedFile: null,
-      likes: null,
+      likes: [],
       createdAt: Date.now,
     });
   };
