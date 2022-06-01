@@ -30,7 +30,7 @@ export const createPost = async (req, res) => {
 };
 export const updatePost = async (req, res) => {
   const { id } = req.params;
-  const { title, message, creator, selectedFile, tags, likeCount, createdAt } =
+  const { title, message, creator,name, selectedFile, tags, likes, createdAt } =
     req.body;
 
   if (!mongoose.Types.ObjectId.isValid(id))
@@ -38,12 +38,13 @@ export const updatePost = async (req, res) => {
 
   const updatePost = {
     creator,
+    name,
     title,
     message,
     tags,
     selectedFile,
     _id: id,
-    likeCount,
+    likes,
     createdAt,
   };
 

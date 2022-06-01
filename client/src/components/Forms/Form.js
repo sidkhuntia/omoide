@@ -11,7 +11,7 @@ const Form = ({ currentID, setCurrentID }) => {
     message: "",
     tags: "",
     selectedFile: null,
-    likeCount: 0,
+    likes: null,
     createdAt: Date.now,
   });
 
@@ -26,7 +26,7 @@ const Form = ({ currentID, setCurrentID }) => {
         message: post.message,
         tags: post.tags,
         selectedFile: post.selectedFile,
-        likeCount: post.likeCount,
+        likes: post.likes,
         createdAt: post.createdAt,
       });
     }
@@ -37,7 +37,7 @@ const Form = ({ currentID, setCurrentID }) => {
     e.preventDefault();
     if (currentID) {
       dispatch(
-        updatePost(currentID, { ...postData, name: user?.result?.name })
+        updatePost(currentID, { ...postData, name: user?.result?.name, creator: user?.result?._id})
       );
     } else {
       dispatch(createPost({ ...postData, name: user?.result?.name }));
@@ -51,7 +51,7 @@ const Form = ({ currentID, setCurrentID }) => {
       message: "",
       tags: "",
       selectedFile: null,
-      likeCount: 0,
+      likes: null,
       createdAt: Date.now,
     });
   };
