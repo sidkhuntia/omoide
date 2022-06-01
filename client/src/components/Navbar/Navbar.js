@@ -56,7 +56,7 @@ const Navbar = () => {
             component={Link}
             to="/auth"
             variant="contained"
-            color="Primary"
+            color="primary"
           >
             Sign In
           </Button>
