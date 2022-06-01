@@ -7,7 +7,6 @@ import { TextField, Button, Typography, Paper } from "@material-ui/core";
 
 const Form = ({ currentID, setCurrentID }) => {
   const [postData, setPostData] = useState({
-    creator: "",
     title: "",
     message: "",
     tags: "",
@@ -15,13 +14,14 @@ const Form = ({ currentID, setCurrentID }) => {
     likeCount: 0,
     createdAt: Date.now,
   });
+
+  const user = JSON.parse(localStorage.getItem("profile"));
   const post = useSelector((state) =>
     currentID ? state.posts.find((post) => post._id === currentID) : null
   );
   useEffect(() => {
     if (post) {
       setPostData({
-        creator: post.creator,
         title: post.title,
         message: post.message,
         tags: post.tags,
@@ -36,16 +36,17 @@ const Form = ({ currentID, setCurrentID }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (currentID) {
-      dispatch(updatePost(currentID, postData));
+      dispatch(
+        updatePost(currentID, { ...postData, name: user?.result?.name })
+      );
     } else {
-      dispatch(createPost(postData));
+      dispatch(createPost({ ...postData, name: user?.result?.name }));
     }
     clear();
   };
   const clear = () => {
     setCurrentID(null);
     setPostData({
-      creator: "",
       title: "",
       message: "",
       tags: "",
@@ -54,7 +55,15 @@ const Form = ({ currentID, setCurrentID }) => {
       createdAt: Date.now,
     });
   };
-
+  if (!user) {
+    return (
+      <Paper className={classes.paper}>
+        <Typography variant="h5" component="h3">
+          Please login to create a post
+        </Typography>
+      </Paper>
+    );
+  }
   return (
     <Paper className={classes.paper}>
       <form
@@ -66,16 +75,6 @@ const Form = ({ currentID, setCurrentID }) => {
         <Typography variant="h6">
           {currentID ? "Editing" : "Creating"} a Memory
         </Typography>
-        <TextField
-          name="creator"
-          variant="outlined"
-          label="Creator"
-          fullWidth
-          value={postData.creator}
-          onChange={(e) => {
-            setPostData({ ...postData, creator: e.target.value });
-          }}
-        />
         <TextField
           name="title"
           variant="outlined"
