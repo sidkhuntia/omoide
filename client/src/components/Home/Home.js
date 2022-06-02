@@ -44,9 +44,11 @@ const Home = () => {
   };
 
   const searchPosts = () => {
-    if (search.trim() || tags) {
+    if (search.trim() || tags.length > 0) {
       dispatch(getPostsBySearch({ search, tags: tags.join(",") }));
-      history.push(`/posts/search?searchQuery=${search || ``}&tags=${tags.join(",")}`);
+      history.push(
+        `/posts/search?searchQuery=${search || ""}&tags=${tags.join(",")}`
+      );
     } else {
       history.push("/");
     }
@@ -60,7 +62,12 @@ const Home = () => {
     if (searchQuery) {
       setSearch(searchQuery);
     }
-  }, [searchTags, searchQuery]);
+    if (searchTags || searchQuery) {
+      console.log("searchTags", searchTags);
+      console.log("searchQuery", searchQuery);
+    }
+    //eslint-disable-next-line
+  }, []);
 
   return (
     <Grow in>

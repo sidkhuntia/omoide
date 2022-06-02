@@ -17,12 +17,14 @@ const PostDetails = () => {
 
   useEffect(() => {
     dispatch(getPost(id));
+    //eslint-disable-next-line
   }, [id]);
 
   useEffect(() => {
     if (post) {
       dispatch(getPostsBySearch({ search: "", tags: post?.tags.join(",") }));
     }
+    //eslint-disable-next-line
   }, [post]);
 
   if (!post) return null;
@@ -83,7 +85,7 @@ const PostDetails = () => {
           />
         </div>
       </div>
-      {!!recommededPosts.length && (
+      {!! recommededPosts.length && (
         <div className={classes.section}>
           <Typography gutterBottom variant="h5">
             You might also like:
