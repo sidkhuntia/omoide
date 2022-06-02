@@ -19,11 +19,11 @@ const PostDetails = () => {
     dispatch(getPost(id));
   }, [id]);
 
-  // useEffect(() => {
-  //   if (post) {
-  //     dispatch(getPostsBySearch({ search: "", tags: post?.tags.join(",") }));
-  //   }
-  // }, [post]);
+  useEffect(() => {
+    if (post) {
+      dispatch(getPostsBySearch({ search: "", tags: post?.tags.join(",") }));
+    }
+  }, [post]);
 
   if (!post) return null;
   if (isLoading) {
@@ -37,7 +37,7 @@ const PostDetails = () => {
   const recommededPosts = posts.filter(({ _id }) => _id !== id);
 
   const openPost = (_id) => {
-    history.push(`/post/${_id}`);
+    history.push(`/posts/${_id}`);
   };
 
   return (
@@ -83,7 +83,7 @@ const PostDetails = () => {
           />
         </div>
       </div>
-      {recommededPosts.length && (
+      {!!recommededPosts.length && (
         <div className={classes.section}>
           <Typography gutterBottom variant="h5">
             You might also like:
