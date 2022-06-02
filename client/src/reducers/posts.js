@@ -1,7 +1,11 @@
 import * as actions from "../constants/actionTypes";
 
-export default (state = [], action) => {
+export default (state = {isLoading:true, posts:[]}, action) => {
   switch (action.type) {
+    case actions.START_LOADING:
+      return {...state, isLoading:true}
+    case actions.END_LOADING:
+      return {...state, isLoading:false}
     case actions.FETCH_ALL:
       return {
         ...state,

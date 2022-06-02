@@ -56,7 +56,7 @@ const Form = ({ currentID, setCurrentID }) => {
   };
   if (!user) {
     return (
-      <Paper className={classes.paper}>
+      <Paper className={classes.paper} elevation={6}>
         <Typography variant="h5" component="h3">
           Please login to create a post
         </Typography>
@@ -64,7 +64,7 @@ const Form = ({ currentID, setCurrentID }) => {
     );
   }
   return (
-    <Paper className={classes.paper}>
+    <Paper className={classes.paper} elevation={6}>
       <form
         autoComplete="off"
         noValidate
