@@ -7,7 +7,6 @@ import moment from "moment";
 
 import useStyles from "./styles.js";
 import { getPost, getPostsBySearch } from "../../actions/posts";
-import { likePost } from "../../api/index.js";
 
 const PostDetails = () => {
   const { post, posts, isLoading } = useSelector((state) => state.posts);

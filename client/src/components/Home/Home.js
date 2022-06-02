@@ -46,9 +46,7 @@ const Home = () => {
   const searchPosts = () => {
     if (search.trim() || tags) {
       dispatch(getPostsBySearch({ search, tags: tags.join(",") }));
-      history.push(
-        `/posts?searchQuery=${search || ``}&tags=${tags.join(",")}`
-      );
+      history.push(`/posts/search?searchQuery=${search || ``}&tags=${tags.join(",")}`);
     } else {
       history.push("/");
     }
@@ -63,7 +61,6 @@ const Home = () => {
       setSearch(searchQuery);
     }
   }, [searchTags, searchQuery]);
-
 
   return (
     <Grow in>
