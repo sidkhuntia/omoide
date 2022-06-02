@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useEffect, useState } from "react";
 //prettier-ignore
 import { Container, Grow, Grid, Paper, AppBar, TextField, Button,
 } from "@material-ui/core";
@@ -27,9 +27,7 @@ const Home = () => {
   const query = useQuery();
   const page = query.get("page") || 1;
   const searchQuery = query.get("searchQuery") || "";
-  console.log(searchQuery);
-  // console.log(query.get("searchQuery"));
-  // console.log(useLocation().search);
+  const searchTags = query.get("tags") || "";
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
@@ -46,17 +44,26 @@ const Home = () => {
   };
 
   const searchPosts = () => {
-    // console.log("search");
-    // console.log(search.trim());
     if (search.trim() || tags) {
       dispatch(getPostsBySearch({ search, tags: tags.join(",") }));
       history.push(
-        `/posts?searchQuery=${search || `none`}&tags=${tags.join(",")}`
+        `/posts?searchQuery=${search || ``}&tags=${tags.join(",")}`
       );
     } else {
-      history.push("/"); 
+      history.push("/");
     }
   };
+
+  //to populate the search fields
+  useEffect(() => {
+    if (searchTags) {
+      setTags(searchTags.split(","));
+    }
+    if (searchQuery) {
+      setSearch(searchQuery);
+    }
+  }, [searchTags, searchQuery]);
+
 
   return (
     <Grow in>
