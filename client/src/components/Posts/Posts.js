@@ -8,7 +8,7 @@ import useStyles from "./styles.js";
 const Posts = ({ setCurrentID }) => {
   const classes = useStyles();
   const { posts, isLoading } = useSelector((state) => state.posts);
-  console.log(posts);
+  // console.log(posts);
   
   if(!posts.length && !isLoading) return "NO POSTS";
   

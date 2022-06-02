@@ -18,8 +18,13 @@ export default (state = {isLoading:true, posts:[]}, action) => {
         ...state,
         posts: action.payload,
       };
+    case actions.FETCH_POST:
+      return {
+        ...state,
+        post: action.payload,
+      };
     case actions.CREATE:
-      return {...state, posts:[ ...state, action.payload ]};
+      return {...state, posts:[ ...state.posts, action.payload ]};
     case actions.UPDATE:
       return {...state, posts:state.posts.map((post) =>
         post._id === action.payload._id ? action.payload : post

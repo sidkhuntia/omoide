@@ -4,6 +4,7 @@ import FileBase from "react-file-base64";
 import { useSelector, useDispatch } from "react-redux";
 import { createPost, updatePost } from "../../actions/posts.js";
 import { TextField, Button, Typography, Paper } from "@material-ui/core";
+import {useHistory} from 'react-router-dom'
 
 const Form = ({ currentID, setCurrentID }) => {
   const [postData, setPostData] = useState({
@@ -32,6 +33,7 @@ const Form = ({ currentID, setCurrentID }) => {
   }, [post]);
   const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory();
   const handleSubmit = (e) => {
     e.preventDefault();
     if (currentID) {
@@ -39,7 +41,7 @@ const Form = ({ currentID, setCurrentID }) => {
         updatePost(currentID, { ...postData, name: user?.result?.name, creator: user?.result?._id})
       );
     } else {
-      dispatch(createPost({ ...postData, name: user?.result?.name }));
+      dispatch(createPost({ ...postData, name: user?.result?.name }, history));
     }
     clear();
   };
