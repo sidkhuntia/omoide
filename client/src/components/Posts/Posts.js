@@ -7,11 +7,11 @@ import useStyles from "./styles.js";
 
 const Posts = ({ setCurrentID }) => {
   const classes = useStyles();
-  const posts = useSelector((state) => state.posts);
+  const { posts } = useSelector((state) => state.posts);
   console.log(posts);
-  return (!posts.length ? 
+  return !posts?.length ? (
     <CircularProgress />
-   : 
+  ) : (
     <Grid
       className={classes.container}
       container
@@ -19,10 +19,7 @@ const Posts = ({ setCurrentID }) => {
       spacing={3}
     >
       {posts.map((post) => (
-        // changing key to id to avoid warning and 
-        //assigning key a value if index doesnt give warning 
-        //but still gives the repeated post error
-        <Grid key={post._id} item xs={12} sm={6}>
+        <Grid key={post._id} item xs={12} sm={12} md={6} lg={3}>
           <Post post={post} setCurrentID={setCurrentID} />
         </Grid>
       ))}

@@ -1,23 +1,16 @@
-import React, { useState, useEffect } from "react";
-import {
-  Container,
-  Grow,
-  Grid,
-  Paper,
-  AppBar,
-  TextField,
-  Button,
+import React, { useState} from "react";
+//prettier-ignore
+import { Container, Grow, Grid, Paper, AppBar, TextField, Button,
 } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import ChipInput from "material-ui-chip-input";
 
-import { getPosts } from "../../actions/posts";
+import { getPostsBySearch } from "../../actions/posts";
 import Posts from "../Posts/Posts.js";
 import Forms from "../Forms/Form.js";
 import useStyles from "./styles.js";
 import Pagination from "../Pagination";
-
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
@@ -34,14 +27,13 @@ const Home = () => {
   const query = useQuery();
   const page = query.get("page") || 1;
   const searchQuery = query.get("searchQuery") || "";
-
-  useEffect(() => {
-    dispatch(getPosts());
-  }, [currentID, dispatch]);
+  console.log(searchQuery);
+  // console.log(query.get("searchQuery"));
+  // console.log(useLocation().search);
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
-      // history.push(`/posts?searchQuery=${search}`);
+      searchPosts();
     }
   };
 
@@ -53,7 +45,18 @@ const Home = () => {
     setTags(tags.filter((tag) => tag !== chip));
   };
 
-
+  const searchPosts = () => {
+    // console.log("search");
+    // console.log(search.trim());
+    if (search.trim() || tags) {
+      dispatch(getPostsBySearch({ search, tags: tags.join(",") }));
+      history.push(
+        `/posts?searchQuery=${search || `none`}&tags=${tags.join(",")}`
+      );
+    } else {
+      history.push("/"); 
+    }
+  };
 
   return (
     <Grow in>
@@ -91,10 +94,19 @@ const Home = () => {
                 onAdd={handleAdd}
                 onDelete={handleDelete}
               />
+              <Button
+                onClick={searchPosts}
+                variant="contained"
+                color="primary"
+                size="medium"
+                fullWidth
+              >
+                Search
+              </Button>
             </AppBar>
             <Forms setCurrentID={setCurrentID} currentID={currentID} />
             <Paper className={classes.pagination} elevation={6}>
-              <Pagination />
+              <Pagination page={page} />
             </Paper>
           </Grid>
         </Grid>

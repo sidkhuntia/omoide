@@ -15,43 +15,26 @@ export default makeStyles((theme) => ({
     },
   },
   heading: {
-    color: theme.palette.primary.main, 
+    color: 'rgba(0,183,255, 1)',
     textDecoration: 'none',
-    fontSize: '2.5em',
-    fontWeight: 300,
-    marginTop: '5px',
-
+    fontSize: '3rem',
   },
   image: {
-    marginLeft: '10px',
-    // marginTop: '5px',
+    marginLeft: '15px',
   },
   toolbar: {
     display: 'flex',
     justifyContent: 'flex-end',
     width: '400px',
-    [theme.breakpoints.down('sm')]: {
-      width: 'auto',
-    },
   },
   profile: {
     display: 'flex',
     justifyContent: 'space-between',
     width: '400px',
-    alignItems: 'center',
-    [theme.breakpoints.down('sm')]: {
-      width: 'auto',
-      marginTop: 20,
-      justifyContent: 'center',
-    },
-  },
-  logout: {
-    marginLeft: '20px',
   },
   userName: {
     display: 'flex',
     alignItems: 'center',
-    textAlign: 'center',
   },
   brandContainer: {
     display: 'flex',

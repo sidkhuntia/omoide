@@ -12,6 +12,9 @@ export default makeStyles((theme) => ({
     marginTop: "1rem",
     padding: "16px",
   },
+  chipInput: {
+    margin: "10px 0",
+  },
   gridContainer: {
     [theme.breakpoints.down("xs")]: {
       flexDirection: "column-reverse",

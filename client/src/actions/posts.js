@@ -1,10 +1,19 @@
 import * as api from "../api";
 import * as actions from "../constants/actionTypes";
 
-export const getPosts = () => async (dispatch) => {
+export const getPosts = (page) => async (dispatch) => {
   try {
-    const { data } = await api.fetchPosts();
+    const { data } = await api.fetchPosts(page);
     dispatch({ type: actions.FETCH_ALL, payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getPostsBySearch = (searchQuery) => async (dispatch) => {
+  try {
+    const { data: {data} } = await api.fetchPostsBySearch(searchQuery);
+    dispatch({ type: actions.FETCH_SEARCH, payload: data });
   } catch (error) {
     console.log(error);
   }

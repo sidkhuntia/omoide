@@ -1,22 +1,32 @@
 import * as actions from "../constants/actionTypes";
 
-export default (posts = [], action) => {
+export default (state = [], action) => {
   switch (action.type) {
     case actions.FETCH_ALL:
-      return action.payload;
+      return {
+        ...state,
+        posts: action.payload.data,
+        currentPage: action.payload.currentPage,
+        totalPages: action.payload.totalPages,
+      };
+    case actions.FETCH_SEARCH:
+      return {
+        ...state,
+        posts: action.payload,
+      };
     case actions.CREATE:
-      return [...posts, action.payload];
+      return {...state, posts:[ ...state, action.payload ]};
     case actions.UPDATE:
-      return posts.map((post) =>
+      return {...state, posts:state.posts.map((post) =>
         post._id === action.payload._id ? action.payload : post
-      );
+      )};
     case actions.LIKE:
-      return posts.map((post) =>
+      return {...state, posts:state.posts.map((post) =>
         post._id === action.payload._id ? action.payload : post
-      );
+      )};
     case actions.DELETE:
-      return posts.filter((post) => post._id !== action.payload);
+      return {...state, posts:state.posts.filter((post) => post._id !== action.payload)};
     default:
-      return posts;
+      return state;
   }
 };
