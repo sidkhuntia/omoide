@@ -64,21 +64,20 @@ const Post = ({ post, setCurrentID }) => {
             {moment(post.createdAt).fromNow()}
           </Typography>
         </div>
-      </div>
-      {(user?.result?.googleId || user?.result?._id) === post.creator && (
-        <div className={classes.overlay2}>
-          <Button
-            style={{ color: "white", minWidth: "24px" }}
-            size="small"
-            onClick={() => {
-              setCurrentID(post._id);
-            }}
-          >
-            <MoreHorizIcon fontSize="medium" />
-          </Button>
-        </div>
-      )}
-      <div className={classes.view} onClick={openPost}>
+        {(user?.result?.googleId || user?.result?._id) === post.creator && (
+          <div className={classes.overlay2}>
+            <Button
+              style={{ color: "white", minWidth: "24px" }}
+              size="small"
+              onClick={(e) => {
+                e.stopPropagation();
+                setCurrentID(post._id);
+              }}
+            >
+              <MoreHorizIcon fontSize="medium" />
+            </Button>
+          </div>
+        )}
         <div className={classes.details}>
           <Typography variant="body2" color="textSecondary">
             {post.tags.map((tag) => `#${tag} `)}
