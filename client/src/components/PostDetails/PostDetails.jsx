@@ -7,6 +7,7 @@ import moment from "moment";
 
 import useStyles from "./styles.js";
 import { getPost, getPostsBySearch } from "../../actions/posts";
+import CommentSection from "./CommentSection.jsx";
 
 const PostDetails = () => {
   const { post, posts, isLoading } = useSelector((state) => state.posts);
@@ -69,9 +70,7 @@ const PostDetails = () => {
             <strong>Realtime Chat - coming soon!</strong>
           </Typography>
           <Divider style={{ margin: "20px 0" }} />
-          <Typography variant="body1">
-            <strong>Comments - coming soon!</strong>
-          </Typography>
+          <CommentSection post={post} />
           <Divider style={{ margin: "20px 0" }} />
         </div>
         <div className={classes.imageSection}>
@@ -85,12 +84,12 @@ const PostDetails = () => {
           />
         </div>
       </div>
-      {!! recommededPosts.length && (
+      {!!recommededPosts.length && (
         <div className={classes.section}>
           <Typography gutterBottom variant="h5">
             You might also like:
           </Typography>
-          <Divider/>
+          <Divider />
           <div className={classes.recommendedPosts}>
             {recommededPosts.map(
               ({
@@ -107,11 +106,22 @@ const PostDetails = () => {
                   key={_id}
                   onClick={() => openPost(_id)}
                 >
-                  <Typography gutterBottom variant="h6">{title}</Typography>
-                  <Typography gutterBottom variant="subtitle2">{name}</Typography>
-                  <Typography gutterBottom variant="subtitle2">{message}</Typography>
+                  <Typography gutterBottom variant="h6">
+                    {title}
+                  </Typography>
+                  <Typography gutterBottom variant="subtitle2">
+                    {name}
+                  </Typography>
+                  <Typography gutterBottom variant="subtitle2">
+                    {message}
+                  </Typography>
                   {/* <Typography gutterBottom variant="subtitle1">Likes: {likePost.length}</Typography> */}
-                  <img src={selectedFile} alt={title} width="200px" height="200px" />
+                  <img
+                    src={selectedFile}
+                    alt={title}
+                    width="200px"
+                    height="200px"
+                  />
                 </div>
               )
             )}

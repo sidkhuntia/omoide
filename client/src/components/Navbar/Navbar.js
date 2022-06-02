@@ -16,12 +16,13 @@ const Navbar = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   useEffect(() => {
     const token = user?.token;
-    if(token){
+    if (token) {
       const decodedToken = decode(token);
 
-      if(decodedToken.exp * 1000 <new Date().getTime()) logout();
+      if (decodedToken.exp * 1000 < new Date().getTime()) logout();
     }
     setUser(JSON.parse(localStorage.getItem("profile")));
+    // eslint-disable-next-line
   }, [location]);
   const logout = () => {
     dispatch({ type: "LOGOUT" });
